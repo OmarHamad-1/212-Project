@@ -2,14 +2,45 @@ public class PhotoManager{
 
 LinkedList<Photo> Photos;  
   
-  public PhotoManager();
+  public PhotoManager(){
+    Photos = new LinkedList<Photo>();
+  }
 
-  public LinkedList<Photo> getPhotos();
+  public LinkedList<Photo> getPhotos(){
+       if (Photo_Exist(p.path)) {
+	        	System.out.println("Already exist!");
+	        	return;
+	        }
+	        Photos.insert(p);
+  }
 
-  public void addPhoto(Photo p);
+  public void addPhoto(Photo p){
+    if (!Photo_Exist(path)) {
+	        	System.out.println("Photo is not exist!");
+	   
+	           }
+	        
+	        Photos.remove();
+  }
 
-  public void deletePhoto(String path);
+  public void deletePhoto(String path){
+    return Photos;
+  }
 
-  public boolean Photo_Exist(String path):
+  public boolean Photo_Exist(String path){
+    String p =path;
+	        
+	    	if (Photos.empty()) 
+	        	return false;
+	        Photos.findFirst();
+	        while (!Photos.last()) {
+	            if (Photos.retrieve().path.equals(p)) 
+	                return true;
+	            Photos.findNext();
+	        }
+	        if (Photos.retrieve().path.equals(p)) 
+	            return true;
+	        return false;
+  }
   
 }
