@@ -1,6 +1,6 @@
 InvIndexPhotoManager{
 
-  public Photomanager();
+  public InvIndexPhotomanager();
 
   public void addPhoto(Photo p);
 
