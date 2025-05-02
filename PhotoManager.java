@@ -7,24 +7,25 @@ LinkedList<Photo> Photos;
   }
 
   public LinkedList<Photo> getPhotos(){
-       if (Photo_Exist(p.path)) {
+	  return Photos;
+  }
+
+  public void addPhoto(Photo p){
+    if (Photo_Exist(p.path)) {
 	        	System.out.println("Already exist!");
 	        	return;
 	        }
 	        Photos.insert(p);
-  }
 
-  public void addPhoto(Photo p){
-    if (!Photo_Exist(path)) {
-	        	System.out.println("Photo is not exist!");
-	   
-	           }
-	        
-	        Photos.remove();
   }
 
   public void deletePhoto(String path){
-    return Photos;
+    if (!Photo_Exist(path)) {
+	        	System.out.println("Photo is not exist!");
+	   		return;
+	           }
+	        
+	        Photos.remove();
   }
 
   public boolean Photo_Exist(String path){
