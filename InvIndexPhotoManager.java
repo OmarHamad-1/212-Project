@@ -66,7 +66,32 @@ public class InvIndexPhotoManager {
     }
 
 	
-    public void deletePhoto(String path);
+    public void deletePhoto(String path) {
+    	if (!PhotosBST.findkey(path)) return;
+        
+        
+        
+        LinkedList<String> tags = PhotosBST.retrieve().tags;
+        
+        
+        if (tags == null) return;
+        Photo PhotoWillDeleted = new Photo(path, tags);
+        tags.findfirst();
+        while (!tags.last()) {
+            if (index.findkey(tags.retrieve())) {
+            	removePhotoInList(index.retrieve(), PhotoWillDeleted);
+                if (index.retrieve().empty())
+                    index.removeKey(tags.retrieve());
+            }
+            tags.findnext();
+        }
+        if (index.findkey(tags.retrieve())) {
+        	removePhotoInList(index.retrieve(), PhotoWillDeleted);
+            if (index.retrieve().empty())
+                index.removeKey(tags.retrieve());
+        }
+    	
+    }
 
     public BST<LinkedList<Photo>> getPhotos(){
 	    return index ;    
