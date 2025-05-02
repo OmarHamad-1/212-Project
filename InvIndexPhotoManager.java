@@ -47,9 +47,29 @@ public class InvIndexPhotoManager {
     public boolean photoExists(String path) {
         return PhotosBST.findKey(path);
     }
-    
+
+
+    public void removePhotoInList(LinkedList<Photo> L, Photo p) {
+        if (L.empty()) return;
+        L.findfirst();
+        while (!L.empty() && !L.last()) {
+            if (L.retrieve().path.equals(p.path)) {
+                L.remove();
+            } 
+    	else {
+                L.findnext();
+            }
+        }
+        if (!L.empty() && L.retrieve().path.equals(p.path)) {
+            L.remove();
+        }
+    }
+
+	
     public void deletePhoto(String path);
 
-    public BST<LinkedList<Photo>> getPhotos();
+    public BST<LinkedList<Photo>> getPhotos(){
+	    return index ;    
+    }
 
 }
