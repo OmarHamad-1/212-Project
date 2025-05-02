@@ -1,11 +1,55 @@
-InvIndexPhotoManager{
 
-  public InvIndexPhotomanager();
+public class InvIndexPhotoManager {
+	BST<LinkedList<Photo>> index;
+	BST<Photo> PhotosBST;
+    
+    public InvIndexPhotoManager() {
+        index = new BST<LinkedList<Photo>>();
+        PhotosBST = new BST<Photo>();
+    }
+    public void addPhoto(Photo p) {
+        if (photoExists(p.path)) return;
 
-  public void addPhoto(Photo p);
+        PhotosBST.insert(p.path, p);
+        LinkedList<String> tags = p.getTags();
+        if (tags.empty()) return;
 
-  public void deletePhoto(String path);
+        tags.findFirst();
+        while (!tags.last()) {
+            String oneTag = tags.retrieve();
+            boolean exist = index.findKey(oneTag);
+            if (!exist) {
+                LinkedList<Photo> PhotosList = new LinkedList<Photo>();
+                PhotosList.insert(p);
+                index.insert(oneTag, PhotosList);
+            } 
+            else {
+                LinkedList<Photo> PhotosList = index.retrieve();
+                PhotosList.insert(p);
+            }
 
-  public BST<LinkedList<Photo>> getPhotos();
+            tags.findNext();
+        }
+        String oneTag = tags.retrieve();
+        boolean exist = index.findKey(oneTag);
+
+        if (!exist) {
+            LinkedList<Photo> PhotosList = new LinkedList<Photo>();
+            PhotosList.insert(p);
+            index.insert(oneTag, PhotosList);
+        } 
+        else {
+            LinkedList<Photo> PhotosList = index.retrieve();
+            PhotosList.insert(p);
+        }
+    }
+    
+    public boolean photoExists(String path) {
+        return PhotosBST.findKey(path);
+    }
+    
+    public void deletePhoto(String path);
+
+    public BST<LinkedList<Photo>> getPhotos();
 
 }
