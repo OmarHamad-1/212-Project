@@ -52,7 +52,7 @@ public class BST<T> {
 			}
 			else {
 				
-				if (k.compareTo(p.key)<0)
+				if (k.compareTo(current.key)<0)
 					current.left = p;
 				else
 					current.right = p;
