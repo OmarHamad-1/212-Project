@@ -39,7 +39,8 @@ public class Album {
 			
 			if(satisfyConditions(allCond, photos.retrieve()))
 				AlbumPhotos.insert(photos.retrieve());
-				photos.findNext();
+			
+		        photos.findNext();
 		}
 		if(satisfyConditions(allCond, photos.retrieve()))
 			AlbumPhotos.insert(photos.retrieve());
